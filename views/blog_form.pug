@@ -1,0 +1,12 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  form(action="", method="POST") 
+    textarea(name="content")=(post===undefined ? '' : post.content)
+    input(type="text" name="title" value=(post===undefined ? '' : post.title))
+    button(type="submit") submit
+
+
+

@@ -1,0 +1,17 @@
+extends layout 
+
+block content 
+  h1= title
+
+  //- pre= followers
+  br
+
+  each follower in followers 
+    div
+      div
+        img(src="/images/blog/blog-post-thumb-7.jpg" width="100")
+      div
+        h3 
+          a(href="/" + follower.username) #{follower.username}
+          |  #{follower.name}
+

@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  each following in user.following
+    div
+      div
+        img(src="/images/blog/blog-post-thumb-7.jpg" width="100")
+      div
+        h3 
+          a(href="/" + following.username) #{following.username}
+          |  #{following.name}

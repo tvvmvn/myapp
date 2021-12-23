@@ -1,0 +1,55 @@
+extends layout 
+
+block content 
+  h1= title 
+  div
+    div.profile-image 
+      img(src="/images/blog/blog-post-thumb-7.jpg")
+    div.about
+      h3 #{user.name}
+      p #[i #{user.about}]
+
+  if (user_global.id.toString()===user._id.toString())
+    div 
+      //- a(href="/accounts/edit") edit
+        
+    
+    div
+      a(href="/create/details") 
+        i(class="fa fa-pen")  New post
+
+  div.user-account-brief
+    div.width-33 
+      h3 Posts
+      p #{posts.length}
+    div.width-33 
+      h3 Follower
+      p 
+        a(href=`/${user.username}/followers`) #{follower}
+    div.width-33 
+      h3 Following
+      p
+        a(href=`/${user.username}/following`) #{user.following.length}
+
+  if (user_global.id.toString()!==user._id.toString() && follow===false)
+    button#followBtn.btn.btn-100(onclick=`followUser('${user._id.toString()}')`) Follow
+
+  br
+
+  br
+  div.row
+    each post in posts
+      div.column
+        a(href=`/?p=${user.username}#${post._id}`) #{post.title}
+
+  script.
+
+    async function followUser(id) {
+      var results = await fetch('/follow', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'id=' + id
+      }).then(res => res.text())
+      console.log(results)
+      document.getElementById('followBtn').style.display = 'none'
+    }

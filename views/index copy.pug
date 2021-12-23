@@ -1,0 +1,93 @@
+extends layout
+
+block content
+  div
+    each post in posts
+      div.carousel-wrap(id=post._id)
+        hr
+        p #{post.title} (#{post.user.username})
+        div.carousel-items
+          each content in post.content
+            div.carousel-item #{content}
+        div.carousel-nav 
+          button.prev &#10094; 
+          button.next &#10095;  
+        div.dots
+        a(href="/" + post.user.username)  #{post.user.username}
+
+        if (post.user._id.toString()===user_global.id.toString())
+          div
+            a(href="/create/details/?id=" + post._id) update 
+            a(href="") delete 
+
+        br
+        br
+
+
+  script.
+    var carousels = document.querySelectorAll('.carousel-items')
+    var prevBtns = document.querySelectorAll('.prev')
+    var nextBtns = document.querySelectorAll('.next')
+    var dots = document.querySelectorAll('.dots')
+
+
+    carousels.forEach(function (carousel_items, index) {
+      carousel_items.num = 0
+
+      for (i=0; i<carousel_items.children.length; i++) {
+        var span = document.createElement('span')
+        span.textContent = 'X'
+        dots[index].appendChild(span) 
+        dots[index].children[0].style.color = 'red'
+      }
+
+      prevBtns[index].style.display = 'none'
+
+
+      if (dots[index].children.length<2) {
+        dots[index].style.display = 'none'
+        nextBtns[index].style.display = 'none'
+      }
+
+      prevBtns[index].addEventListener('click', function () {
+        carousel_items.num += 1
+
+        if (-carousel_items.num<1) {
+          prevBtns[index].style.display = 'none'
+        }
+        
+        for (i=0; i<dots[index].children.length; i++) {
+          dots[index].children[i].style.color = 'black'
+        }
+        
+        nextBtns[index].style.display = 'block'
+
+        dots[index].children[-carousel_items.num].style.color = 'red'
+        carousel_items.style.transform = `translateX(${carousel_items.num*100}%)`
+      })
+
+      nextBtns[index].addEventListener('click', function () {
+        carousel_items.num -= 1 
+        
+        prevBtns[index].style.display = 'block'
+
+        if(carousel_items.children.length-1 <= -carousel_items.num) {
+          nextBtns[index].style.display = 'none'
+        }
+
+        for (i=0; i<dots[index].children.length; i++) {
+          dots[index].children[i].style.color = 'black'
+        }
+
+        dots[index].children[-carousel_items.num].style.color = 'red'
+
+        carousel_items.style.transform = `translateX(${carousel_items.num*100}%)`
+      })
+    })
+
+
+
+
+
+    
+

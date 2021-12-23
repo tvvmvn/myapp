@@ -1,0 +1,42 @@
+extends layout 
+
+block content 
+  //- h1= title 
+  input(type="text", placeholder="Title or content")
+  div#posts.row
+
+
+  script.
+    var input = document.querySelector('input')
+    var posts = document.getElementById('posts')
+
+    input.addEventListener('keyup', myFunction)
+
+    async function myFunction() {
+      var posts = await fetch ('/live_search?q=' + input.value).then(res => res.json())
+      posts.sort(function (a, b) {
+        if (a.reg_date < b.reg_date) {
+          return 1;
+        }
+        if (a.reg_date > b.reg_date) {
+          return -1;
+        }
+        return 0;
+      })
+
+      document.getElementById('posts').innerHTML = ''
+
+      for (post of posts) {
+        var div = document.createElement('div')
+        div.setAttribute('class', 'column')
+        div.innerHTML = 
+        `
+         <a href="/?q=${input.value}#${post._id}">${post.title}</a>
+        `
+        document.getElementById('posts').appendChild(div)
+      }
+      console.log(posts)
+    }
+
+    myFunction()
+    

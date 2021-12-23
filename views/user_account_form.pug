@@ -1,0 +1,48 @@
+extends layout 
+
+block content  
+  h1= title
+  
+  br
+
+  form(action="") 
+    div.form-group
+      label(for="") Profile image 
+      br
+      input(type="file" name="my_file") 
+    //- div.form-group
+    //-   label(for="") Email
+    //-   input(type="text" name="email" placeholder="e-mail")
+    //- div.form-group
+    //-   label(for="") Username
+    //-   input(type="text" name="username" placeholder="username")
+    div.form-group
+      label(for="") Name
+      input(type="text" name="name" placeholder="name" value=user.name)
+
+    div.form-group
+      label(for="") About
+      textarea(name="about", cols="30", rows="10")=user.about
+    
+    button confirm
+
+    div
+      a(href="/password/change") Password change 
+
+  script.
+    var form = document.querySelector('form')
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault()
+      
+      var results = await fetch ('/accounts/edit', {
+        method: 'POST',
+        body: new FormData(form)
+      }).then(res => res.json())
+
+      if (results.errors) {
+        console.log('error!')
+      } else {
+        location.href = '/' + results.username
+      }
+    })

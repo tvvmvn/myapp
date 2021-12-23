@@ -1,0 +1,33 @@
+* {
+
+}
+
+
+nav {
+  position: fixed;
+  background: #222;
+  width: 280px;
+  height: 100%;
+}
+
+nav a {
+  display: block;
+  padding: 25px;
+  color: white
+}
+
+nav a:hover {
+  background: #333
+}
+
+.wrap {
+  min-height: 1000px;
+  padding:25px
+} 
+
+
+footer {
+  background-color: whitesmoke;
+  padding:25px; 
+  text-align: center
+}

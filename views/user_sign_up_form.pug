@@ -1,0 +1,53 @@
+link(rel='stylesheet', href='/stylesheets/style.css')
+
+
+div.login-form(style="margin: 0")
+  form(action="") 
+    h1(style="text-align: center") 詩 作
+    ul.errors 
+
+    div.form-group
+      input(type="text" name="email" placeholder="email")
+    div.form-group
+      input(type="text" name="password" placeholder="password")
+    div.form-group
+      input(type="text" name="password_confirm" placeholder="password confirm")
+    div.form-group
+      input(type="text" name="username" placeholder="username")
+
+    div
+      input(type="checkbox")
+      label(for="") I Agree to all policy & terms
+    
+    br
+
+    div
+      button.btn.btn-100(type="submit") Create account
+
+script.
+  var form = document.querySelector('form')
+  var ul = document.querySelector('ul')
+  form.addEventListener('submit', handleSubmit)
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+
+    var formData = new FormData(form)
+
+    var results = await fetch ('/sign_up', {
+      method: 'POST',
+      body: new URLSearchParams(formData)
+    }).then(res => res.json())
+
+    ul.innerHTML = ''
+
+    if (results.errors) {
+      for (error of results.errors) {
+        var li = document.createElement('li')
+        li.textContent = error 
+        ul.appendChild(li)
+      }
+    } else {
+      location.href = '/'
+    }
+  }

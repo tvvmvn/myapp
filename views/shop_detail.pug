@@ -1,0 +1,52 @@
+extends layout 
+
+block content 
+  h1= title
+  
+  div.carousel-wrap
+    div.carousel-items
+      div
+        img(src="/images/blog/blog-post-thumb-1.jpg", alt="")
+      div
+        img(src="/images/blog/blog-post-thumb-2.jpg", alt="")
+      div
+        img(src="/images/blog/blog-post-thumb-3.jpg", alt="")
+
+    div.carousel-nav
+      a.carousel-prev-btn(href="") <
+      a.carousel-next-btn(href="") >
+
+
+  h1 Lorem ipsum
+  h3 Category : Lorem ipsum dolor
+  h3 Brand : Lorem 
+  h3 
+  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem mollitia iure possimus esse. Iste explicabo eos alias quaerat sint neque dignissimos delectus voluptates quis, quo ipsa sed temporibus doloribus cum?
+
+  button.add-to-cart Add to cart
+
+  script.
+    var prev = document.querySelector('.carousel-prev-btn')
+    var next = document.querySelector('.carousel-next-btn')
+    var carousel_items = document.querySelector('.carousel-items')
+
+    var num = 0
+
+    prev.addEventListener('click', function (e) {
+      num += 100
+      e.preventDefault()
+      carousel_items.style.transform = `translateX(${num}%)`
+    })
+
+    next.addEventListener('click', function (e) {
+      num -= 100
+      e.preventDefault()
+      carousel_items.style.transform = `translateX(${num}%)`
+    })
+
+
+
+
+
+
+  

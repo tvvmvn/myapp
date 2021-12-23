@@ -1,0 +1,28 @@
+
+link(rel='stylesheet', href='/stylesheets/style.css')
+
+
+div.login-form
+  form(action="" method="POST") 
+    h1(style="text-align: center") 詩 作
+
+    div.form-group
+      input(type="text" name="email" placeholder="email")
+    div.form-group
+      input(type="text" name="password" placeholder="password")
+
+    div
+      input(type="checkbox")
+      label(for="") remember me
+    
+    div
+      button.btn.btn-100(type="submit") Login
+
+    ul
+      li 
+        a(href="/sign_up") Create account
+      //- li 
+      //-   a(href="/") Lost password? 
+
+
+

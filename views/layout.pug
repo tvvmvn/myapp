@@ -1,0 +1,48 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous")
+  body
+    div.header 
+      h1
+        a(href="/") 詩 作
+      a.explore(href="/explore") 
+        i(class="far fa-compass") 
+      a.user(href=(user_global? '/' + user_global.username : '')) 
+        i(class="fas fa-user")
+      a.home(href="/") 
+        i(class="fas fa-campground")
+      
+
+    div.wrap
+      block content
+
+    footer
+
+      a(href="") about / 
+      a(href="") Terms & Policy / 
+      a(href="") 
+
+      p 2021 Company
+
+  //- script.
+  //-   var prev = document.querySelector('.carousel-prev-btn')
+  //-   var next = document.querySelector('.carousel-next-btn')
+  //-   var carousel_items = document.querySelector('.carousel-items')
+
+  //-   var num = 0
+
+  //-   prev.addEventListener('click', function (e) {
+  //-     num += 100
+  //-     e.preventDefault()
+  //-     carousel_items.style.transform = `translateX(${num}%)`
+  //-   })
+
+  //-   next.addEventListener('click', function (e) {
+  //-     num -= 100
+  //-     e.preventDefault()
+  //-     carousel_items.style.transform = `translateX(${num}%)`
+  //-   })
+

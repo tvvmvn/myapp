@@ -1,0 +1,48 @@
+extends layout 
+
+block content 
+  h1= title 
+
+  form(action="", method="POST") 
+    
+    button#addBtn +
+    
+    div#content-container
+      if (post)
+        each content in post.content 
+          div.content
+            textarea(name="content" required="true") #{content} 
+            span(onclick="deleteContent(this)") &times;
+      else
+        div.content
+          textarea(name="content" required="true") 
+          span(onclick="deleteContent(this)") &times;
+    
+    div.form-group
+      input(type="text" name="title" required="true" placeholder="Your awesome title" value=(post===undefined ? '' : post.title))
+    
+    button.btn create
+
+
+  script.
+    var contents = document.querySelectorAll('.content')
+    var content_container = document.getElementById('content-container')
+    var content = document.querySelector('.content')
+
+    var addBtn = document.getElementById('addBtn')
+
+    addBtn.addEventListener('click', function (e) {
+      e.preventDefault()
+      var x = content.cloneNode(true)
+      x.children[0].value=''
+      content_container.appendChild(x)
+    })
+
+    function deleteContent(elm) {
+      elm.parentElement.remove()
+    }
+
+    
+
+
+

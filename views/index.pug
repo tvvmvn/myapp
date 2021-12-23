@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  //- pre= posts 
+
+  div
+    each post in posts 
+      div(id=post._id)
+        i 
+          a(href="/" + post.user.username) #{post.user.username}
+        hr
+        div #{post.content}
+        
+        if (post.user._id.toString()===user_global.id.toString())
+          div
+            a(href="/create/details/?id=" + post._id) update / 
+            a(href="") delete 
+      br
+      br
